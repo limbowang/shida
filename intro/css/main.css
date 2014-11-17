@@ -1,0 +1,195 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, del, dfn, em, img, ins, kbd, q, samp, small, strong, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td, article, aside, footer, header, nav, section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    font-family: Helvetica, "Microsoft YaHei";
+    vertical-align: baseline;
+    background: transparent;
+    list-style: none;
+}
+
+html, body, .swipe, .swipe-wrap {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: url("../img/front-bg.png");
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    background-image: url(../img/loading.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#slider {
+    max-width: 480px;
+}
+
+.swipe {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+}
+
+.swipe-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.swipe-wrap > div {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.front {
+    background: url("../img/front-bg.png") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.front div {
+    display: block;
+    text-align: center;
+}
+
+.front .header {
+    color: #ffffff;
+    font-size: 1.1em;
+    padding-top: 80px;
+}
+
+.front .title {
+    padding: 80px 0;
+}
+
+.front .title img {
+    width: 80%;
+}
+
+.front .logo {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+}
+
+.front .logo img {
+    width: 120px;
+    padding: 0 10px 0 0;
+}
+
+.front .tip {
+    color: #696969;
+    font-size: 15pt;
+    margin-top: 200px;
+    padding: 20px;
+}
+
+.back {
+    background: url("../img/end-bg.png") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.back div {
+    display: block;
+    text-align: center;
+}
+
+.back .title {
+    padding-top: 80px;
+}
+
+.back .title img {
+    width: 150px;
+}
+
+.back .logo {
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+}
+
+.back .logo img {
+    width: 120px;
+    padding: 0 10px 0 0;
+}
+
+.back .tip {
+    color: #696969;
+    font-size: 1.2em;
+    padding: 10px 0 10px 15px;
+}
+
+.intro {
+    background: url("../img/intro-bg.png") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.intro div {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.intro .intro-img.current {
+    display: inline;
+}
+
+.intro .intro-img-left {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 86%;
+    z-index: 1;
+}
+
+.intro .intro-img-right {
+    position: absolute;
+    top: 24%;
+    right: 0;
+    width: 58%;
+}
+
+.intro .intro-word-item {
+    position: absolute;
+    left: 20px;
+    bottom: 25px;
+    color: #ffffff;
+    font-size: 11pt;
+    line-height: 1.25em;
+    opacity: 0;
+    text-align: left;
+    z-index: 2;
+}
+
+.intro .intro-word-item.current {
+    opacity: 1;
+}
+
+.intro .intro-word-item h1 {
+    font-size: 1.5em;
+    padding-top: 10px;
+}
+
+.intro .intro-logo {
+    position: absolute;
+    right: 2px;
+    bottom: 30px;
+    width: 100px;
+}
