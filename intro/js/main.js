@@ -12,7 +12,7 @@ var swipe = new Swipe(document.getElementById('slider'), {
     }
 });
 
-$(window).load(function() {
+$(window).load(function () {
     $('.loading').remove();
 });
 
@@ -22,9 +22,8 @@ $(window).load(function() {
             startX = 0,
             movoX = 0,
             isTouchEnabled = true,
-            duration = 1 * 1000,
+            duration = 1000,
             $intro = $(".intro"),
-            $introWord = $('.intro-word'),
             index = 1;
 
 
@@ -45,11 +44,18 @@ $(window).load(function() {
                         }, {
                             step: function (now, fx) {
                                 if (fx.prop == 'opacity') {
-                                    $(this).css('-webkit-transform', 'rotate(' + 360 * (1 - now) + 'deg)');
-                                    $(this).css('-moz-transform', 'rotate(' + 360 * (1 - now) + 'deg)');
-                                    $(this).css('transform', 'rotate(' + 360 * (1 - now) + 'deg)');
-                                    $next.css('-webkit-filter', 'brightness(' + (2 - now) / 2 + ')');
-                                    $next.css('filter', 'brightness(' + (2 - now) / 2 + ')');
+                                    var transform = 'rotate(' + 360 * (1 - now) + 'deg)';
+                                    $(this).css({
+                                        '-webkit-transform': transform,
+                                        '-moz-transform': transform,
+                                        'transform': transform
+                                    });
+
+                                    var filter = 'brightness(' + (2 - now) / 2 + ')';
+                                    $next.css({
+                                        '-webkit-filter': filter,
+                                        'filter': filter
+                                    });
                                 }
                             },
                             duration: duration
@@ -76,10 +82,10 @@ $(window).load(function() {
                                     $(this).css('transform', 'rotate(' + 360 * now + 'deg)');
                                     $next.css('-webkit-filter', 'brightness(' + (2 - now) / 2 + ')');
                                     $next.css('filter', 'brightness(' + (2 - now) / 2 + ')');
-                            }
-                        },
-                        duration: duration
-                    }, 'linear');
+                                }
+                            },
+                            duration: duration
+                        }, 'linear');
 
                     $prev.removeClass('prev');
                     $(this).removeClass('current').addClass('prev');
@@ -206,15 +212,15 @@ $(window).load(function() {
 
                     var deltaX = movoX - startX;
                     moveX = startX = 0;
-                    if (deltaX < -10) {
-                        if (index == 3) {
+                    if (deltaX < -20) {
+                        if (index == 6) {
                             swipe.next();
                         } else {
                             slideIn();
                             index += 1
                         }
 
-                    } else if (deltaX > 10) {
+                    } else if (deltaX > 20) {
                         if (index == 1) {
                             swipe.prev();
                         } else {
@@ -222,7 +228,6 @@ $(window).load(function() {
                             index -= 1;
                         }
                     }
-                    console.log(index);
                     setTimeout(function () {
                         isTouchEnabled = true;
                     }, duration);

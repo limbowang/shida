@@ -85,11 +85,6 @@ body {
     bottom: 20px;
 }
 
-.front .logo img {
-    width: 120px;
-    padding: 0 10px 0 0;
-}
-
 .front .tip {
     color: #696969;
     font-size: 15pt;
@@ -123,15 +118,26 @@ body {
     bottom: 20px;
 }
 
-.back .logo img {
-    width: 120px;
-    padding: 0 10px 0 0;
-}
-
 .back .tip {
     color: #696969;
     font-size: 1.2em;
     padding: 10px 0 10px 15px;
+}
+
+.brand-list {
+    display: inline-block;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0 10px 0 0;
+}
+
+.brand-list li {
+    float: left;
+    padding: 4px;
+}
+
+.brand-list li img {
+    height: 22px;
 }
 
 .intro {
