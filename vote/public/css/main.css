@@ -1,0 +1,207 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, del, dfn, em, img, ins, kbd, q, samp, small, strong, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td, article, aside, footer, header, nav, section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    font-family: Helvetica, "Microsoft YaHei";
+    vertical-align: baseline;
+    background: transparent;
+    list-style: none;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: url(../images/background.jpg);
+}
+
+.container,
+.players-list {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.players-list-item {
+    position: relative;
+    height: 25%;
+}
+
+.players-list-item > div {
+    position: relative;
+    height: 100%;
+}
+
+.players-list-item .left .player{
+    position: absolute;
+    left: 0;
+}
+
+.players-list-item .player {
+    height: 200%;
+}
+
+.players-list-item .right .player{
+    position: absolute;
+    right: 0;
+    top: -30%;
+}
+
+.players-list-item .info > div {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+.players-list-item .left .info {
+    position: absolute;
+    left: 0;
+    bottom: -10%;
+}
+
+.players-list-item .right .info {
+    position: absolute;
+    right: 0;
+    top: 65%;
+    text-align: right;
+    z-index: 1;
+}
+
+
+.players-list-item .info .btn-vote {
+}
+
+.players-list-item .info .btn-vote img {
+    width: 100%;
+    max-width: 80px;
+}
+
+#vote-form {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2;
+    text-align: center;
+}
+
+.form-container {
+    position: relative;
+    display: inline-block;
+    background: #cccccc;
+    width: 50%;
+    margin-top: 25%;
+    padding: 20px 10px;
+    vertical-align: middle;
+    border-radius: 6px;
+    box-shadow: 0 0 15px 1px #000000;
+}
+@media screen and (min-width: 960px) {
+    .form-container {
+        width: 250px;
+        margin-top: 100px;
+        padding: 20px 40px;
+    }
+}
+
+.form-container .close {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: -10px;
+    right: -10px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    background: #d80000;
+    color: #ffffff;
+    padding: 4px;
+}
+
+.form-container .form-field {
+    margin: 10px 0;
+    overflow: hidden;
+    line-height: 1.42857143;
+}
+
+.form-container .field-label {
+    float: left;
+    width: 30%;
+    height: 20px;
+}
+
+.form-container .field-value {
+    float: left;
+    width: 70%;
+    text-align: left;
+}
+
+.form-container .field-value input[type='text'],
+.form-container .field-value input[type='password'] {
+    width: 90%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.form-container .error {
+    font-size: 14px;
+    color: red;
+    padding-top: 10px;
+}
+
+.auth-form.hidden {
+    display: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-large {
+    width: 100%;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}

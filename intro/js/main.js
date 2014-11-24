@@ -213,7 +213,7 @@ $(window).load(function () {
                     var deltaX = movoX - startX;
                     moveX = startX = 0;
                     if (deltaX < -20) {
-                        if (index == 12) {
+                        if (index == 15) {
                             swipe.next();
                         } else {
                             slideIn();
