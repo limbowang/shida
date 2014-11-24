@@ -7,7 +7,7 @@ class VoteController extends BaseController {
      */
     public function __construct()
     {
-        $this->beforeFilter('csrf', array('on' => 'post'));
+//        $this->beforeFilter('csrf', array('on' => 'post'));
     }
 
 
@@ -18,7 +18,6 @@ class VoteController extends BaseController {
 	 */
 	public function index()
 	{
-		//
         return View::make('vote.index')
             ->with('players', Player::all());
 	}
@@ -31,6 +30,7 @@ class VoteController extends BaseController {
 	 */
 	public function create()
 	{
+        App::abort(404);
 	}
 
 
@@ -49,24 +49,30 @@ class VoteController extends BaseController {
 
         if (Input::get('username')) {
             $data['username'] = Input::get('username');
-        } else {
+        } else if (Session::get('username')) {
             $data['username'] = Session::get('username');
+        } else {
+            return Response::json(array('result' => 'error', 'msg' => '输入信息不全或有误'));
         }
 
         $requires = array(
             'username' => 'required|max:10',
-            'pid' => 'required|numeric|max:15|min:1'
+            'pid' => 'required|numeric|max:15|min:1',
+            'password' => ''
         );
+
+        if(Input::get('username')) {
+            $requires['password'] = 'required';
+        }
+
         $validator = Validator::make($data, $requires);
         if ($validator->fails()) {
-            return Response::json(array('result' => 'error', 'msg' => '输入信息有误'));
+            return Response::json(array('result' => 'error', 'msg' => '输入信息不全或有误'));
         }
 
         if (!$this->auth($data['username'], $data['password'])) {
             return Response::json(array('result' => 'error', 'msg' => '身份验证失败'));
         }
-
-        Session::set('username', $data['username']);
 
         $user = User::where('sid', $data['username'])->first();
         if (!$user) {
@@ -160,7 +166,8 @@ class VoteController extends BaseController {
 	}
 
     public function auth($username, $password) {
-        if (Session::get('username') == $username) {
+
+        if (Session::get('username') == $username && Hash::check($username, Session::get('token'))) {
             return true;
         }
         $curlPost = 'IDToken0=&IDToken1=' . $username . '&IDToken2=' .$password . '&IDButton=Log+In&goto=null&gx_charset=UTF-8';
@@ -172,6 +179,12 @@ class VoteController extends BaseController {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);
         $data = curl_exec($ch);//运行curl
         curl_close($ch);
+
+        if ($data == '') {
+            Session::set('username', $username);
+            Session::set('token', Hash::make($username));
+        }
+
         return $data == '';
     }
 

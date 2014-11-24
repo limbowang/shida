@@ -21,6 +21,12 @@ $(window).on('load', function() {
 
 
     $voteForm
+        .on('click', function(e) {
+            e = e.originalEvent;
+            if (e.target == e.currentTarget) {
+                $(this).hide();
+            }
+        })
         .on('click', '.close', function() {
             $voteForm.hide();
         })
@@ -29,6 +35,7 @@ $(window).on('load', function() {
         })
         .on('submit', function(e) {
             e.preventDefault();
+            $(this).find('.error').html('');
             var $form = $(this).find('form');
             var posting = $.post(
                 $form.attr('action'),
@@ -50,7 +57,7 @@ $(window).on('load', function() {
     $('#switch-user').on('click', function(e) {
         e.preventDefault();
         $(this).remove();
-        $voteForm.find('.form-current-user').remove();
+        $voteForm.find('.form-current-info').remove();
         $voteForm.find('.auth-form').show();
     });
 });

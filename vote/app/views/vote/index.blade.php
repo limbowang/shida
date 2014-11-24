@@ -39,12 +39,6 @@
 
 <div id="vote-form">
     <div class="form-container">
-        @if (Session::get('count') >= 3 && strstr(Session::get('date'), date("Y-m-d")))
-        <h1 class="title">你今天已经投过三次了哟！明天再来吧。</h1>
-        <div class="form-field">
-            <button class="btn btn-large btn-primary btn-close">确定</button>
-        </div>
-        @else
         <h1 class="title">请使用学校学号密码进行身份验证</h1>
         {{ Form::open(array('url' => 'vote', 'method' => 'post')) }}
         <div class="form-field">
@@ -55,13 +49,32 @@
             </div>
         </div>
         @if (Session::get('username'))
-        <div class="form-field form-current-user">
-            <div class="field-label">学号：</div>
-            <div class="field-value">
-                <span>{{ Session::get('username') }}</span>
-                <span><a href="#" id="switch-user">切换账号</a></span>
+            @if (Session::get('count') >= 3 && strstr(Session::get('date'), date("Y-m-d")))
+            <div class="form-current-info">
+                <div class="form-field">
+                    <div class="field-label">学号：</div>
+                    <div class="field-value">
+                        <span>{{ Session::get('username') }}</span>
+                    </div>
+                </div>
+                <p>你今天已经投过三次了哟！明天再来吧。或者 <a href="#" id="switch-user">切换账户</a></p>
+                <div class="form-field">
+                    <button class="btn btn-large btn-primary btn-close">确定</button>
+                </div>
             </div>
-        </div>
+            @else
+            <div class="form-current-info">
+                <div class="form-field">
+                    <div class="field-label">学号：</div>
+                    <div class="field-value">
+                        <span>{{ Session::get('username') }}</span>
+                        <span><a href="#" id="switch-user">切换账号</a></span>
+                    </div>
+                </div>
+                <div class="field-submit">{{ Form::submit('提交', array('class' => 'btn btn-primary btn-large')); }}</div>
+                <div class="error"></div>
+            </div>
+            @endif
         <div class="auth-form hidden">
             <div class="form-field">
                 <div class="field-label">学号：</div>
@@ -72,6 +85,8 @@
                 <div class="field-label">密码：</div>
                 <div class="field-value">{{ Form::password('password'); }}</div>
             </div>
+            <div class="field-submit">{{ Form::submit('提交', array('class' => 'btn btn-primary btn-large')); }}</div>
+            <div class="error"></div>
         </div>
         @else
         <div class="form-field">
@@ -83,10 +98,10 @@
             <div class="field-label">密码：</div>
             <div class="field-value">{{ Form::password('password'); }}</div>
         </div>
-        @endif
         <div class="field-submit">{{ Form::submit('提交', array('class' => 'btn btn-primary btn-large')); }}</div>
         <div class="error"></div>
         @endif
+        {{--@endif--}}
         {{ Form::close() }}
         <span class="close">X</span>
     </div>
