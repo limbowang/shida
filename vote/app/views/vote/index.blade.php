@@ -39,7 +39,7 @@
 
 <div id="vote-form">
     <div class="form-container">
-        @if (Session::get('count') >= 3)
+        @if (Session::get('count') >= 3 && strstr(Session::get('date'), date("Y-m-d")))
         <h1 class="title">你今天已经投过三次了哟！明天再来吧。</h1>
         <div class="form-field">
             <button class="btn btn-large btn-primary btn-close">确定</button>
@@ -87,6 +87,7 @@
         <div class="field-submit">{{ Form::submit('提交', array('class' => 'btn btn-primary btn-large')); }}</div>
         <div class="error"></div>
         @endif
+        {{ Form::close() }}
         <span class="close">X</span>
     </div>
 </div>

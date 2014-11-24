@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		 $this->call('PlayerSeeder');
+        $this->call('AdminSeeder');
 	}
 
 }
@@ -41,6 +42,19 @@ class PlayerSeeder extends Seeder {
         );
         foreach ($players as $player) {
             Player::create($player);
+        }
+    }
+}
+
+class AdminSeeder extends Seeder {
+    public function run() {
+        DB::table('admins')->delete();
+
+        $admins = array(
+            array('username' => $_ENV['ADMIN_USERNAME'], 'password' => Hash::make($_ENV['ADMIN_PASSWORD']))
+        );
+        foreach ($admins as $admin) {
+            Admin::create($admin);
         }
     }
 }

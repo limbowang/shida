@@ -7,7 +7,7 @@ class VoteController extends BaseController {
      */
     public function __construct()
     {
-//        $this->beforeFilter('csrf', array('on' => 'post'));
+        $this->beforeFilter('csrf', array('on' => 'post'));
     }
 
 
@@ -55,10 +55,10 @@ class VoteController extends BaseController {
 
         $requires = array(
             'username' => 'required|max:10',
-            'pid' => 'required'
+            'pid' => 'required|numeric|max:15|min:1'
         );
         $validator = Validator::make($data, $requires);
-        if ($validator->fails() || ($data['pid'] < 1 || $data['pid'] > 15) ) {
+        if ($validator->fails()) {
             return Response::json(array('result' => 'error', 'msg' => '输入信息有误'));
         }
 
@@ -75,6 +75,7 @@ class VoteController extends BaseController {
             $user->count = 1;
         } else if (strstr($user->updated_at, date("Y-m-d")) && $user->count >= 3) {
             Session::set('count', $user->count);
+            Session::set('date', $user->updated_at);
             return Response::json(array('result' => 'error', 'msg' => '你今天已投票3次。明天再来吧。'));
         } else {
             $user->count += 1;
@@ -101,6 +102,7 @@ class VoteController extends BaseController {
         $player->save();
 
         Session::set('count', $user->count);
+        Session::set('date', $user->updated_at);
 
         return Response::json(array('result' => 'success'));
 	}

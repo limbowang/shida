@@ -12,3 +12,4 @@
 */
 
 Route::resource('vote', 'VoteController');
+Route::controller('admin', 'AdminController');
