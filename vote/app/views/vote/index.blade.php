@@ -39,7 +39,7 @@
 
 <div id="vote-form">
     <div class="form-container">
-        <h1 class="title">请使用学校学号密码进行身份验证</h1>
+        <h1 class="title">请使用学校学号密码进行身份验证（身份信息我们绝对保密哟）</h1>
         {{ Form::open(array('url' => 'vote', 'method' => 'post')) }}
         <div class="form-field">
             <div class="field-label">选手：</div>
