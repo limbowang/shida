@@ -12,7 +12,6 @@
                         <div class="name">
                             <p>{{ $player->pid }}&nbsp; {{ $player->name }}</p>
                         </div>
-<!--                        <div class="count">票数：{{ $player->counts }}</div>-->
                         <a href="#" class="btn-vote" data-id="{{ $player->pid }}" data-name="{{ $player->name }}">
                             {{ HTML::image('images/left-vote-button.png', $alt="vote", $attributes = array()) }}
                         </a>
@@ -28,7 +27,6 @@
                         <div class="name">
                             <p>{{ $player->pid }}&nbsp; {{ $player->name }}</p>
                         </div>
-<!--                        <div class="count">票数：{{ $player->counts }}</div>-->
                     </div>
                 </div>
             @endif

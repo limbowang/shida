@@ -3,7 +3,7 @@
  */
 
 
-var $elem = $('#background');
+var $elem = $('#background').find('img');
 var height = $elem.height() - $(window).height();
 
 var prev = -1;
@@ -14,8 +14,10 @@ var s = 0;
 var range = 0;
 var q = 0;
 
-var handleOritation = function (e) {
+var handleOrientation = function (e) {
+    e = e.originalEvent;
     var alpha = e.alpha;
+    console.log(e);
     if (prev != -1) {
         var d = Math.abs(Math.floor(alpha - prev));
         if (d > 180)
@@ -35,16 +37,18 @@ var handleOritation = function (e) {
                 var dt = curTime - time;
                 var deltaTime = q > dt ? q : dt;
 
-                if (deltaTime < 200) {
-                    deltaTime = 200;
-                } else if (deltaTime > 800) {
-                    deltaTime = 800;
+                var left = 400, right = 600;
+
+                if (deltaTime < left) {
+                    deltaTime = left;
+                } else if (deltaTime > right) {
+                    deltaTime = right;
                 }
-                deltaTime -= 200;
+                deltaTime -= left;
                 //console.log(deltaTime);
                 $elem.stop().animate({
-                    top: -(600 - deltaTime) / 600 * height
-                }, 1500);
+                    top: -(right - left - deltaTime) / (right - left) * height
+                }, 1100);
 
                 time = curTime;
                 q = dt;
@@ -59,24 +63,8 @@ var handleOritation = function (e) {
     }
 };
 
-var handleMotion = function (e) {
-    var delta = Math.abs(Math.floor(e.rotationRate.gamma));
+$(window).on('deviceorientation', handleOrientation);
 
-    if (prev != -1) {
-        if (delta  <= 2) {
-            var curTime = new Date().getTime();
-            var deltaTime = curTime - time;
-            time = curTime;
-            if (deltaTime > 52) {
-                elem.innerHTML += '<div>' + deltaTime + '</div>';
-            }
-        }
-    } else {
-        prev = delta;
-        time = new Date().getTime();
-    }
-};
-
-window.onload = function () {
-    window.addEventListener('deviceorientation', handleOritation, true);
-};
+$elem.on('touchstart', function(e) {
+    e.preventDefault();
+});
