@@ -61,6 +61,15 @@ class AdminController extends BaseController
     }
 
     public function getVotes() {
+        $votes = null;
+        if (Input::has('id')) {
+            $sid = Input::get('id');
+            $votes = Vote::where('sid', $sid)->paginate(20);
+        } else {
+            $votes = Vote::paginate(20);
+        }
 
+        $this->layout = View::make('admin.votes')
+            ->with('votes', $votes);
     }
 }
