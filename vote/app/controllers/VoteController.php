@@ -84,7 +84,12 @@ class VoteController extends BaseController {
             Session::set('date', $user->updated_at);
             return Response::json(array('result' => 'error', 'msg' => '你今天已投票3次。明天再来吧。'));
         } else {
-            $user->count += 1;
+            if (strstr($user->updated_at, date("Y-m-d"))) {
+                $user->count += 1;
+            } else{
+                $user->count = 1;
+                $user->touch();
+            }
         }
 
         $vote = Vote::where('sid', $data['username'])
@@ -170,6 +175,13 @@ class VoteController extends BaseController {
         if (Session::get('username') == $username && Hash::check($username, Session::get('token'))) {
             return true;
         }
+
+        if (!$this->isAuthNeeded($username)) {
+            Session::set('username', $username);
+            Session::set('token', Hash::make($username));
+            return true;
+        }
+
         $curlPost = 'IDToken0=&IDToken1=' . $username . '&IDToken2=' .$password . '&IDButton=Log+In&goto=null&gx_charset=UTF-8';
         $ch = curl_init();//初始化curl
         curl_setopt($ch,CURLOPT_URL, 'http://tjis.tongji.edu.cn:58080/amserver/UI/Login');//抓取指定网页
@@ -188,4 +200,15 @@ class VoteController extends BaseController {
         return $data == '';
     }
 
+    private function isAuthNeeded($sid) {
+        // These following students cannot vote so we set white list
+        $WHITE_LIST = array('1470', '1474', '1475', '1476');
+        foreach ($WHITE_LIST as $preg) {
+            $pos = strpos($sid, $preg);
+            if ($pos === 0 && strlen($sid) == 7) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
