@@ -61,13 +61,19 @@ class AdminController extends BaseController
     }
 
     public function getVotes() {
-        $votes = null;
+        $votes = new Vote;
+        $sid = Input::get('id');
+        $pid = Input::get('pid');
         if (Input::has('id')) {
             $sid = Input::get('id');
-            $votes = Vote::where('sid', $sid)->paginate(20);
-        } else {
-            $votes = Vote::paginate(20);
+            $votes = $votes->where('sid', 'like', $sid . '%');
         }
+        if (Input::has('pid')) {
+            $pid = Input::get('pid');
+            $votes = $votes->where('pid', $pid);
+        }
+
+        $votes = $votes->paginate(20);
 
         $this->layout = View::make('admin.votes')
             ->with('votes', $votes);

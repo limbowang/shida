@@ -8,7 +8,15 @@
     <div class="row" style="margin-top: 10px">
       <div class="col-lg-3">
         <div class="input-group">
-          <input type="text" class="form-control" name="id">
+          <input type="text" class="form-control" name="id" placeholder="学号">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">搜索</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+      <div class="col-lg-3">
+        <div class="input-group">
+          <input type="text" class="form-control" name="pid" placeholder="选手编号">
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit">搜索</button>
           </span>
@@ -34,6 +42,6 @@
             @endforeach
         </tbody>
     </table>
-    {{ $votes->links();  }}
+    {{ $votes->appends(Input::except('page'))->links();  }}
 </div>
 @stop
